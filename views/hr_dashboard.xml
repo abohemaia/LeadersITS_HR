@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_leadersits_hr_dashboard_form" model="ir.ui.view">
+        <field name="name">leadersits.hr.dashboard.form</field>
+        <field name="model">leadersits.hr.dashboard</field>
+        <field name="arch" type="xml">
+            <form string="لوحة الإحصائيات" create="0" delete="0" edit="0">
+                <sheet>
+                    <div class="container-fluid o_hr_dashboard">
+                        <!-- الصف الأول: تحذيرات + الحضور اليوم -->
+                        <div class="row mt-3">
+                            <!-- تحذيرات -->
+                            <div class="col-lg-6 mb-3">
+                                <div class="card shadow-sm h-100">
+                                    <div class="card-header bg-white">
+                                        <h5 class="mb-0 text-dark fw-bold">تحذيرات</h5>
+                                    </div>
+                                    <div class="card-body p-0">
+                                        <table class="table table-hover mb-0">
+                                            <tbody>
+                                                <tr style="cursor:pointer;" class="o_dashboard_row">
+                                                    <td class="text-center fw-bold" style="width:60px;">
+                                                        <field name="no_contract"/>
+                                                    </td>
+                                                    <td>
+                                                        <button name="action_view_no_contract" type="object"
+                                                                class="btn btn-link text-start p-0 border-0">
+                                                            الموظفين الذين لا يملكون عقوداً جارية
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <tr style="cursor:pointer;">
+                                                    <td class="text-center fw-bold">
+                                                        <field name="no_code"/>
+                                                    </td>
+                                                    <td>
+                                                        <button name="action_view_no_code" type="object"
+                                                                class="btn btn-link text-start p-0 border-0">
+                                                            الموظفين الذين لا يملكون كود موظف
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <tr style="cursor:pointer;">
+                                                    <td class="text-center fw-bold">
+                                                        <field name="no_badge"/>
+                                                    </td>
+                                                    <td>
+                                                        <button name="action_view_no_badge" type="object"
+                                                                class="btn btn-link text-start p-0 border-0">
+                                                            الموظفين الذين لا يملكون رقم تعريف
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <tr style="cursor:pointer;">
+                                                    <td class="text-center fw-bold">
+                                                        <field name="no_bank"/>
+                                                    </td>
+                                                    <td>
+                                                        <button name="action_view_no_bank" type="object"
+                                                                class="btn btn-link text-start p-0 border-0">
+                                                            الموظفين الذين لا يملكون حساب بنكي
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- الحضور اليوم -->
+                            <div class="col-lg-6 mb-3">
+                                <div class="card shadow-sm h-100">
+                                    <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                                        <h5 class="mb-0 text-dark fw-bold">الحضور اليوم</h5>
+                                        <button name="action_view_today_attendance" type="object"
+                                                class="btn btn-link p-0 border-0">الكل</button>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row text-center">
+                                            <div class="col-4">
+                                                <div class="border rounded p-3">
+                                                    <div class="display-6 text-success fw-bold">
+                                                        <field name="today_present"/>
+                                                    </div>
+                                                    <div class="text-muted mt-1">حاضرين</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="border rounded p-3">
+                                                    <div class="display-6 text-danger fw-bold">
+                                                        <field name="today_absent"/>
+                                                    </div>
+                                                    <div class="text-muted mt-1">غائبين</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="border rounded p-3">
+                                                    <div class="display-6 text-primary fw-bold">
+                                                        <field name="today_records"/>
+                                                    </div>
+                                                    <div class="text-muted mt-1">سجلات</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- الصف الثاني: الموظفين + العقود -->
+                        <div class="row">
+                            <!-- الموظفين -->
+                            <div class="col-lg-6 mb-3">
+                                <div class="card shadow-sm h-100">
+                                    <div class="card-header bg-white">
+                                        <h5 class="mb-0 text-dark fw-bold">الموظفين</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row text-center">
+                                            <div class="col-4">
+                                                <button name="action_view_active_employees" type="object"
+                                                        class="btn btn-light w-100 p-3 border rounded">
+                                                    <div class="display-6 text-primary fw-bold">
+                                                        <field name="active_employees"/>
+                                                    </div>
+                                                    <div class="text-muted mt-1">نشطين</div>
+                                                </button>
+                                            </div>
+                                            <div class="col-4">
+                                                <button name="action_view_archived_employees" type="object"
+                                                        class="btn btn-light w-100 p-3 border rounded">
+                                                    <div class="display-6 text-secondary fw-bold">
+                                                        <field name="archived_employees"/>
+                                                    </div>
+                                                    <div class="text-muted mt-1">مؤرشفين</div>
+                                                </button>
+                                            </div>
+                                            <div class="col-4">
+                                                <button name="action_view_departments" type="object"
+                                                        class="btn btn-light w-100 p-3 border rounded">
+                                                    <div class="display-6 text-info fw-bold">
+                                                        <field name="dept_count"/>
+                                                    </div>
+                                                    <div class="text-muted mt-1">إدارات</div>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="text-center mt-3 pt-3 border-top">
+                                            <span class="text-muted">إجمالي الموظفين:</span>
+                                            <span class="fw-bold fs-4 ms-2">
+                                                <field name="total_employees"/>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- العقود -->
+                            <div class="col-lg-6 mb-3">
+                                <div class="card shadow-sm h-100">
+                                    <div class="card-header bg-white">
+                                        <h5 class="mb-0 text-dark fw-bold">العقود</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row text-center">
+                                            <div class="col-4">
+                                                <button name="action_view_active_contracts" type="object"
+                                                        class="btn btn-light w-100 p-3 border rounded">
+                                                    <div class="display-6 text-success fw-bold">
+                                                        <field name="active_contracts"/>
+                                                    </div>
+                                                    <div class="text-muted mt-1">جارية</div>
+                                                </button>
+                                            </div>
+                                            <div class="col-4">
+                                                <button name="action_view_expiring_contracts" type="object"
+                                                        class="btn btn-light w-100 p-3 border rounded">
+                                                    <div class="display-6 text-warning fw-bold">
+                                                        <field name="expiring_contracts"/>
+                                                    </div>
+                                                    <div class="text-muted mt-1">تنتهي قريباً</div>
+                                                </button>
+                                            </div>
+                                            <div class="col-4">
+                                                <button name="action_view_expired_contracts" type="object"
+                                                        class="btn btn-light w-100 p-3 border rounded">
+                                                    <div class="display-6 text-danger fw-bold">
+                                                        <field name="expired_contracts"/>
+                                                    </div>
+                                                    <div class="text-muted mt-1">منتهية</div>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_leadersits_hr_dashboard_open" model="ir.actions.server">
+        <field name="name">إحصائيات الموارد البشرية</field>
+        <field name="model_id" ref="model_leadersits_hr_dashboard"/>
+        <field name="state">code</field>
+        <field name="code">action = model.action_open_dashboard()</field>
+    </record>
+</odoo>

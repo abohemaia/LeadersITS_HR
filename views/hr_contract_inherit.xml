@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_contract_view_form_inherit_lits" model="ir.ui.view">
+        <field name="name">hr.contract.form.inherit.lits_hr</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='other']" position="after">
+                <page string="LITS-HR" name="lits_hr">
+                    <group>
+                        <group string="نظام العمل" name="lits_work_system_group">
+                            <field name="lits_work_system" widget="radio"/>
+                        </group>
+                        <group string="مؤثرات الحضور والانصراف" name="lits_attendance_effects_group">
+                            <field name="eff_late"
+                                   readonly="lits_work_system not in ('work_schedule',)"/>
+                            <field name="eff_leave_during"
+                                   readonly="lits_work_system not in ('work_schedule', 'daily_free')"/>
+                            <field name="eff_early_leave"
+                                   readonly="lits_work_system not in ('work_schedule', 'daily_free')"/>
+                            <field name="eff_morning_ot"
+                                   readonly="lits_work_system not in ('work_schedule',)"/>
+                            <field name="eff_evening_ot"
+                                   readonly="lits_work_system not in ('work_days', 'work_schedule', 'daily_free')"/>
+                            <field name="eff_absence"
+                                   readonly="lits_work_system not in ('work_days', 'work_schedule', 'daily_free', 'monthly_free')"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

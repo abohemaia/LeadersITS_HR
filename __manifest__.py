@@ -1,0 +1,30 @@
+# -*- coding: utf-8 -*-
+{
+    "name": "LITS_HR",
+    "summary": "LeadersITS Human Resources",
+    "version": "18.0.1.0.0",
+    "category": "Human Resources",
+    "author": "LeadersITS",
+    "license": "LGPL-3",
+    "depends": ["base", "hr", "hr_attendance", "hr_contract", "hr_holidays"],
+    "data": [
+        "security/security.xml",
+        "security/ir.model.access.csv",
+        "views/form_test.xml",
+        "views/hr_contract_inherit.xml",
+        "views/hr_attendance_detail.xml",
+        "views/hr_dashboard.xml",
+        "views/hr_employee_inherit.xml",
+        "views/hr_operation_data.xml",
+        "views/hr_time_config.xml",
+        "views/menu.xml",
+    ],
+    "assets": {
+        "web.assets_backend": [
+            "LeadersITS_HR/static/src/scss/menu_separator.scss",
+        ],
+    },
+    "post_init_hook": "_post_init_hook",
+    "application": True,
+    "installable": True,
+}

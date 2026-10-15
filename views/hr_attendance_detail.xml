@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_leadersits_hr_attendance_detail_list" model="ir.ui.view">
+        <field name="name">leadersits.hr.attendance.detail.list</field>
+        <field name="model">leadersits.hr.attendance.detail</field>
+        <field name="arch" type="xml">
+            <list string="الحضور والانصراف تفصيلي" editable="bottom">
+                <field name="employee_id"/>
+                <field name="employee_code"/>
+                <field name="calc_date"/>
+                <field name="tr_dt"/>
+                <field name="direction"/>
+                <field name="tr_type" readonly="1"/>
+                <field name="att_month" optional="hide"/>
+                <field name="att_year" optional="hide"/>
+                <field name="latitude_in" optional="hide"/>
+                <field name="longitude_in" optional="hide"/>
+                <field name="latitude_out" optional="hide"/>
+                <field name="longitude_out" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_leadersits_hr_attendance_detail_form" model="ir.ui.view">
+        <field name="name">leadersits.hr.attendance.detail.form</field>
+        <field name="model">leadersits.hr.attendance.detail</field>
+        <field name="arch" type="xml">
+            <form string="الحضور والانصراف تفصيلي">
+                <sheet>
+                    <group>
+                        <group string="بيانات الموظف">
+                            <field name="employee_id"/>
+                            <field name="employee_code"/>
+                        </group>
+                        <group string="بيانات الحركة">
+                            <field name="calc_date"/>
+                            <field name="tr_dt"/>
+                            <field name="direction"/>
+                            <field name="tr_type" readonly="1"/>
+                            <field name="att_month"/>
+                            <field name="att_year"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="إحداثيات الحضور">
+                            <field name="latitude_in"/>
+                            <field name="longitude_in"/>
+                        </group>
+                        <group string="إحداثيات الانصراف">
+                            <field name="latitude_out"/>
+                            <field name="longitude_out"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_leadersits_hr_attendance_detail_search" model="ir.ui.view">
+        <field name="name">leadersits.hr.attendance.detail.search</field>
+        <field name="model">leadersits.hr.attendance.detail</field>
+        <field name="arch" type="xml">
+            <search string="بحث">
+                <field name="employee_id"/>
+                <field name="employee_code"/>
+                <field name="calc_date"/>
+                <field name="att_month"/>
+                <field name="att_year"/>
+                <field name="direction"/>
+                <field name="tr_type"/>
+                <filter name="filter_in" string="حضور" domain="[('direction', '=', 'in')]"/>
+                <filter name="filter_out" string="انصراف" domain="[('direction', '=', 'out')]"/>
+                <separator/>
+                <filter name="filter_today" string="اليوم"
+                        domain="[('calc_date', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                <separator/>
+                <filter name="filter_jan" string="يناير" domain="[('att_month', '=', '1')]"/>
+                <filter name="filter_feb" string="فبراير" domain="[('att_month', '=', '2')]"/>
+                <filter name="filter_mar" string="مارس" domain="[('att_month', '=', '3')]"/>
+                <filter name="filter_apr" string="أبريل" domain="[('att_month', '=', '4')]"/>
+                <filter name="filter_may" string="مايو" domain="[('att_month', '=', '5')]"/>
+                <filter name="filter_jun" string="يونيو" domain="[('att_month', '=', '6')]"/>
+                <filter name="filter_jul" string="يوليو" domain="[('att_month', '=', '7')]"/>
+                <filter name="filter_aug" string="أغسطس" domain="[('att_month', '=', '8')]"/>
+                <filter name="filter_sep" string="سبتمبر" domain="[('att_month', '=', '9')]"/>
+                <filter name="filter_oct" string="أكتوبر" domain="[('att_month', '=', '10')]"/>
+                <filter name="filter_nov" string="نوفمبر" domain="[('att_month', '=', '11')]"/>
+                <filter name="filter_dec" string="ديسمبر" domain="[('att_month', '=', '12')]"/>
+                <group expand="0" string="تجميع">
+                    <filter name="group_employee" string="الموظف" context="{'group_by': 'employee_id'}"/>
+                    <filter name="group_month" string="الشهر" context="{'group_by': 'att_month'}"/>
+                    <filter name="group_year" string="العام" context="{'group_by': 'att_year'}"/>
+                    <filter name="group_date" string="تاريخ الحساب" context="{'group_by': 'calc_date'}"/>
+                    <filter name="group_direction" string="الاتجاه" context="{'group_by': 'direction'}"/>
+                    <filter name="group_type" string="نوع الحركة" context="{'group_by': 'tr_type'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_leadersits_hr_attendance_detail" model="ir.actions.act_window">
+        <field name="name">الحضور والانصراف تفصيلي</field>
+        <field name="res_model">leadersits.hr.attendance.detail</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_leadersits_hr_attendance_detail_search"/>
+    </record>
+</odoo>

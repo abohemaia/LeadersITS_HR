@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <!-- Show each app icon next to its name in the main apps dropdown. -->
+    <t t-name="LeadersITS_HR.AppsMenuIcons" t-inherit="web.NavBar.AppsMenu" t-inherit-mode="extension">
+        <xpath expr="//t[@t-esc='app.name']" position="before">
+            <img t-if="app.webIconData"
+                 class="o_lits_menu_app_icon"
+                 alt=""
+                 t-att-src="app.webIconData.startsWith('data:') ? app.webIconData : ('data:image/' + (app.webIconData.startsWith('P') ? 'svg+xml' : 'png') + ';base64,' + app.webIconData)"/>
+        </xpath>
+    </t>
+</templates>

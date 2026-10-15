@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_leadersits_hr_time_config_form" model="ir.ui.view">
+        <field name="name">leadersits.hr.time.config.form</field>
+        <field name="model">leadersits.hr.time.config</field>
+        <field name="arch" type="xml">
+            <form string="إعدادات حساب الوقت">
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group string="حساب الشهر">
+                            <field name="month_calc" widget="radio"/>
+                            <label for="month_start_day" string="فترة الشهر"/>
+                            <div class="o_row">
+                                <span>من يوم</span>
+                                <field name="month_start_day" class="oe_inline o_hr_narrow_field"
+                                       readonly="month_calc != 'custom'"/>
+                                <span>إلى يوم</span>
+                                <field name="month_end_day" class="oe_inline o_hr_narrow_field"
+                                       readonly="1"/>
+                            </div>
+                        </group>
+                        <group string="البصمة">
+                            <field name="missing_punch"/>
+                            <label for="empty_punch_penalty"/>
+                            <div class="o_row">
+                                <field name="empty_punch_penalty" class="oe_inline"/>
+                                <field name="penalty_minutes" class="oe_inline o_hr_narrow_field"
+                                       readonly="empty_punch_penalty != 'minutes'"
+                                       required="empty_punch_penalty == 'minutes'"
+                                       placeholder="عدد الدقائق"/>
+                            </div>
+                            <label for="half_day_exit"/>
+                            <div class="o_row">
+                                <field name="half_day_exit" class="oe_inline"/>
+                                <span>الغياب بدون إذن *</span>
+                                <field name="absence_multiplier" class="oe_inline o_hr_narrow_field"/>
+                            </div>
+                            <label for="max_morning_ot" string="أقصى ساعات إضافي"/>
+                            <div class="o_row">
+                                <span>صباحي</span>
+                                <field name="max_morning_ot" class="oe_inline o_hr_narrow_field"/>
+                                <span>مسائي</span>
+                                <field name="max_evening_ot" class="oe_inline o_hr_narrow_field"/>
+                            </div>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="تأخير" name="late">
+                            <field name="late_line_ids">
+                                <list editable="bottom">
+                                    <field name="late_type"/>
+                                    <field name="from_minutes"/>
+                                    <field name="to_minutes"/>
+                                    <field name="action_type"/>
+                                    <field name="custom_value"
+                                           readonly="action_type != 'custom'"
+                                           required="action_type == 'custom'"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="إضافي" name="overtime">
+                            <field name="overtime_line_ids">
+                                <list editable="bottom">
+                                    <field name="ot_type"/>
+                                    <field name="ot_category"/>
+                                    <field name="ot_start"/>
+                                    <field name="action_type"/>
+                                    <field name="custom_value"
+                                           readonly="action_type != 'custom'"
+                                           required="action_type == 'custom'"/>
+                                    <field name="special_time"/>
+                                    <field name="special_time_value" widget="float_time"
+                                           readonly="not special_time"
+                                           required="special_time"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="LITS" name="lits">
+                            <field name="lits_line_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="value"/>
+                                    <field name="description"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_leadersits_hr_time_config_list" model="ir.ui.view">
+        <field name="name">leadersits.hr.time.config.list</field>
+        <field name="model">leadersits.hr.time.config</field>
+        <field name="arch" type="xml">
+            <list string="إعدادات حساب الوقت">
+                <field name="name"/>
+                <field name="month_calc"/>
+                <field name="missing_punch"/>
+                <field name="empty_punch_penalty"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_leadersits_hr_time_config_open" model="ir.actions.server">
+        <field name="name">إعدادات حساب الوقت</field>
+        <field name="model_id" ref="model_leadersits_hr_time_config"/>
+        <field name="state">code</field>
+        <field name="code">action = model.action_open_config()</field>
+    </record>
+</odoo>

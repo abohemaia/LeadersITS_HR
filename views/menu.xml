@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_leadersits_hr_root" name="الموارد البشرية" sequence="10"/>
+
+    <menuitem id="menu_leadersits_hr_statistics" name="إحصائيات"
+              parent="menu_leadersits_hr_root" action="action_leadersits_hr_dashboard_open" sequence="10"/>
+
+    <menuitem id="menu_leadersits_hr_employees" name="الموظفين"
+              parent="menu_leadersits_hr_root" sequence="20"/>
+    <menuitem id="menu_leadersits_hr_employee_list" name="الموظفين"
+              parent="menu_leadersits_hr_employees" action="hr.open_view_employee_list_my"
+              groups="hr.group_hr_user" sequence="10"/>
+    <menuitem id="menu_leadersits_hr_contracts" name="العقود"
+              parent="menu_leadersits_hr_employees" action="hr_contract.action_hr_contract" sequence="20"/>
+
+    <menuitem id="menu_leadersits_hr_attendance" name="الحضور والانصراف"
+              parent="menu_leadersits_hr_root" sequence="30"/>
+    <menuitem id="menu_leadersits_hr_attendance_details" name="الحضور تفصيلي"
+              parent="menu_leadersits_hr_attendance" action="action_leadersits_hr_attendance_detail" sequence="10"/>
+    <menuitem id="menu_leadersits_hr_attendance_main" name="الحضور والانصراف"
+              parent="menu_leadersits_hr_attendance" action="hr_attendance.hr_attendance_action" sequence="20"/>
+    <menuitem id="menu_leadersits_hr_attendance_calc" name="إجراء حساب"
+              parent="menu_leadersits_hr_attendance"
+              action="action_leadersits_hr_form_test" sequence="30"/>
+    <menuitem id="menu_leadersits_hr_attendance_import" name="سحب بيانات"
+              parent="menu_leadersits_hr_attendance" sequence="40"/>
+    <menuitem id="menu_leadersits_hr_import_excel" name="اكسيل"
+              parent="menu_leadersits_hr_attendance_import" action="action_leadersits_hr_form_test" sequence="10"/>
+    <menuitem id="menu_leadersits_hr_import_database" name="قواعد بيانات"
+              parent="menu_leadersits_hr_attendance_import" action="action_leadersits_hr_form_test" sequence="20"/>
+    <menuitem id="menu_leadersits_hr_import_fingerprint" name="ماكينة بصمة"
+              parent="menu_leadersits_hr_attendance_import" action="action_leadersits_hr_form_test" sequence="30"/>
+    <menuitem id="menu_leadersits_hr_import_mobile" name="تطبيق هاتف"
+              parent="menu_leadersits_hr_attendance_import" action="action_leadersits_hr_form_test" sequence="40"/>
+
+    <menuitem id="menu_leadersits_hr_leaves" name="الإجازات"
+              parent="menu_leadersits_hr_root" sequence="40"/>
+    <menuitem id="menu_leadersits_hr_leave_effects" name="مؤثرات الإجازات"
+              parent="menu_leadersits_hr_leaves" action="hr_holidays.hr_leave_action_action_approve_department"
+              groups="hr_holidays.group_hr_holidays_responsible" sequence="10"/>
+    <menuitem id="menu_leadersits_hr_public_holidays" name="العطلات الرسمية"
+              parent="menu_leadersits_hr_leaves" action="hr_holidays.open_view_public_holiday"
+              groups="hr_holidays.group_hr_holidays_manager" sequence="20"/>
+
+    <menuitem id="menu_leadersits_hr_payroll" name="الرواتب"
+              parent="menu_leadersits_hr_root" sequence="50"/>
+    <menuitem id="menu_leadersits_hr_payroll_calculation" name="حساب الرواتب"
+              parent="menu_leadersits_hr_payroll" action="action_leadersits_hr_form_test" sequence="10"/>
+    <menuitem id="menu_leadersits_hr_whatsapp" name="إرسال واتساب"
+              parent="menu_leadersits_hr_payroll" action="action_leadersits_hr_form_test" sequence="20"/>
+
+    <menuitem id="menu_leadersits_hr_reports" name="التقارير"
+              parent="menu_leadersits_hr_root" sequence="60"/>
+    <menuitem id="menu_leadersits_hr_attendance_report" name="الحضور والانصراف"
+              parent="menu_leadersits_hr_reports" action="action_leadersits_hr_form_test" sequence="10"/>
+    <menuitem id="menu_leadersits_hr_leave_reports" name="الإجازات"
+              parent="menu_leadersits_hr_reports" sequence="20"/>
+    <menuitem id="menu_leadersits_hr_employee_leaves_report" name="إجازات الموظفين"
+              parent="menu_leadersits_hr_leave_reports" action="hr_holidays.action_hr_available_holidays_report"
+              groups="hr_holidays.group_hr_holidays_user" sequence="10"/>
+    <menuitem id="menu_leadersits_hr_leave_balances_report" name="أرصدة الإجازات"
+              parent="menu_leadersits_hr_leave_reports" action="hr_holidays.action_hr_holidays_by_employee_and_type_report"
+              groups="hr_holidays.group_hr_holidays_manager" sequence="20"/>
+    <menuitem id="menu_leadersits_hr_payroll_report" name="الرواتب"
+              parent="menu_leadersits_hr_reports" action="action_leadersits_hr_form_test" sequence="30"/>
+
+    <menuitem id="menu_leadersits_hr_settings" name="الإعدادات"
+              parent="menu_leadersits_hr_root" sequence="70"/>
+    <menuitem id="menu_leadersits_hr_general_data" name="بيانات عامة"
+              parent="menu_leadersits_hr_settings" sequence="10"/>
+    <menuitem id="menu_leadersits_hr_departments" name="الإدارات"
+              parent="menu_leadersits_hr_general_data" action="hr.hr_department_kanban_action"
+              groups="base.group_user" sequence="10"/>
+    <menuitem id="menu_leadersits_hr_jobs" name="الوظائف"
+              parent="menu_leadersits_hr_general_data" action="hr.action_hr_job"
+              groups="hr.group_hr_user" sequence="20"/>
+    <menuitem id="menu_leadersits_hr_leave_types" name="أنواع الإجازات"
+              parent="menu_leadersits_hr_general_data" action="hr_holidays.open_view_holiday_status"
+              groups="hr_holidays.group_hr_holidays_manager" sequence="30"/>
+    <menuitem id="menu_leadersits_hr_time_calculation" name="حساب الوقت"
+              parent="menu_leadersits_hr_settings" action="action_leadersits_hr_time_config_open" sequence="20"/>
+    <menuitem id="menu_leadersits_hr_settings_import" name="سحب بيانات"
+              parent="menu_leadersits_hr_settings" action="action_leadersits_hr_form_test" sequence="30"/>
+    <menuitem id="menu_leadersits_hr_operation_settings" name="إعدادات التشغيل"
+              parent="menu_leadersits_hr_settings" sequence="40"/>
+    <menuitem id="menu_leadersits_hr_operation_data" name="بيانات التشغيل"
+              parent="menu_leadersits_hr_operation_settings"
+              action="action_leadersits_hr_operation_data"
+              groups="LeadersITS_HR.group_lits_operation_data" sequence="10"/>
+</odoo>

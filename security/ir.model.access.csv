@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_leadersits_hr_form_test_user,access.leadersits.hr.form.test.user,model_leadersits_hr_form_test,base.group_user,1,1,1,1
+access_leadersits_hr_operation_data,access.leadersits.hr.operation.data,model_leadersits_hr_operation_data,LeadersITS_HR.group_lits_operation_data,1,1,1,1
+access_leadersits_hr_attendance_detail,access.leadersits.hr.attendance.detail,model_leadersits_hr_attendance_detail,base.group_user,1,1,1,1
+access_leadersits_hr_time_config,access.leadersits.hr.time.config,model_leadersits_hr_time_config,base.group_user,1,1,1,1
+access_leadersits_hr_time_config_late,access.leadersits.hr.time.config.late,model_leadersits_hr_time_config_late,base.group_user,1,1,1,1
+access_leadersits_hr_time_config_overtime,access.leadersits.hr.time.config.overtime,model_leadersits_hr_time_config_overtime,base.group_user,1,1,1,1
+access_leadersits_hr_time_config_lits,access.leadersits.hr.time.config.lits,model_leadersits_hr_time_config_lits,base.group_user,1,1,1,1
+access_leadersits_hr_dashboard,access.leadersits.hr.dashboard,model_leadersits_hr_dashboard,base.group_user,1,1,1,1

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="group_lits_operation_data" model="res.groups">
+        <field name="name">LITS Operation Data</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+</odoo>

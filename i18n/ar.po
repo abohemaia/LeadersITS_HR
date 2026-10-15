@@ -1,0 +1,39 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* LeadersITS_HR
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Language: ar\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. module: LeadersITS_HR
+#: model:ir.ui.menu,name:LeadersITS_HR.menu_leadersits_hr_attendance
+msgid "Attendance and Check-Out"
+msgstr "الحضور والانصراف"
+
+#. module: LeadersITS_HR
+#: model:ir.ui.menu,name:LeadersITS_HR.menu_leadersits_hr_leaves
+msgid "Leaves"
+msgstr "الإجازات"
+
+#. module: LeadersITS_HR
+#: model:ir.ui.menu,name:LeadersITS_HR.menu_leadersits_hr_payroll
+msgid "Payroll"
+msgstr "الرواتب"
+
+#. module: LeadersITS_HR
+#: model:ir.ui.menu,name:LeadersITS_HR.menu_leadersits_hr_reports
+msgid "Reports"
+msgstr "التقارير"
+
+#. module: LeadersITS_HR
+#: model:ir.ui.menu,name:LeadersITS_HR.menu_leadersits_hr_settings
+msgid "Settings"
+msgstr "الإعدادات"
+
+#. module: LeadersITS_HR
+#: model:ir.ui.menu,name:LeadersITS_HR.menu_leadersits_hr_test
+msgid "Test"
+msgstr "اختبار"
