@@ -7,3 +7,13 @@ access_leadersits_hr_time_config_late,access.leadersits.hr.time.config.late,mode
 access_leadersits_hr_time_config_overtime,access.leadersits.hr.time.config.overtime,model_leadersits_hr_time_config_overtime,base.group_user,1,1,1,1
 access_leadersits_hr_time_config_lits,access.leadersits.hr.time.config.lits,model_leadersits_hr_time_config_lits,base.group_user,1,1,1,1
 access_leadersits_hr_dashboard,access.leadersits.hr.dashboard,model_leadersits_hr_dashboard,base.group_user,1,1,1,1
+access_leadersits_hr_attendance_import,access.leadersits.hr.attendance.import,model_leadersits_hr_attendance_import,base.group_user,1,1,1,1
+access_leadersits_hr_import_config,access.leadersits.hr.import.config,model_leadersits_hr_import_config,base.group_user,1,1,1,1
+access_leadersits_hr_schedule_exception,access.leadersits.hr.schedule.exception,model_leadersits_hr_schedule_exception,base.group_user,1,1,1,1
+access_leadersits_hr_location_exception,access.leadersits.hr.location.exception,model_leadersits_hr_location_exception,base.group_user,1,1,1,1
+access_leadersits_hr_import_config_fp,access.leadersits.hr.import.config.fingerprint,model_leadersits_hr_import_config_fingerprint,base.group_user,1,1,1,1
+access_leadersits_hr_general_settings,access.leadersits.hr.general.settings,model_leadersits_hr_general_settings,base.group_user,1,1,1,1
+access_leadersits_hr_attendance_its,access.leadersits.hr.attendance.its,model_leadersits_hr_attendance_its,base.group_user,1,1,1,1
+access_leadersits_hr_calc_exception,access.leadersits.hr.calc.exception,model_leadersits_hr_calc_exception,base.group_user,1,1,1,1
+access_leadersits_hr_calc_process,access.leadersits.hr.calc.process,model_leadersits_hr_calc_process,base.group_user,1,1,1,1
+access_leadersits_hr_calc_process_confirm,access.leadersits.hr.calc.process.confirm,model_leadersits_hr_calc_process_confirm,base.group_user,1,1,1,1

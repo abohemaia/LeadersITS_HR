@@ -14,6 +14,9 @@ HEADER_MAP = {
     'كود الموظف': 'employee_code',
     'الرقم البصمة': 'badge_number',
     'رقم البصمة': 'badge_number',
+    'كود البصمة': 'badge_number',
+    'كود البصمه': 'badge_number',
+    'رقم البصمه': 'badge_number',
     'الاسم الكامل': 'full_name',
     'اسم الموظف': 'full_name',
     'اسم الادارة': 'department',
@@ -241,6 +244,7 @@ class LeadersitsHrOperationData(models.Model):
         badge = _to_str(data.get('badge_number'))
         if badge:
             vals['lits_badge_number'] = badge
+            vals['barcode'] = badge
 
         national_id = _to_str(data.get('national_id'))
         if national_id:

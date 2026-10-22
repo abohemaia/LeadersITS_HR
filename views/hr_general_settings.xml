@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_leadersits_hr_general_settings_form" model="ir.ui.view">
+        <field name="name">leadersits.hr.general.settings.form</field>
+        <field name="model">leadersits.hr.general.settings</field>
+        <field name="arch" type="xml">
+            <form string="اعدادات عامة" create="false" delete="false">
+                <sheet>
+                    <group string="تفعيل اجراءات شاشة الحضور الاجمالي">
+                        <group>
+                            <field name="att_allow_create"/>
+                            <field name="att_allow_edit"/>
+                            <field name="att_allow_delete"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="att_kiosk_mode"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_leadersits_hr_general_settings_open" model="ir.actions.server">
+        <field name="name">اعدادات عامة</field>
+        <field name="model_id" ref="model_leadersits_hr_general_settings"/>
+        <field name="state">code</field>
+        <field name="code">action = model.action_open_general_settings()</field>
+    </record>
+</odoo>

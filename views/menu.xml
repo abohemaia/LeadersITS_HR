@@ -18,20 +18,29 @@
     <menuitem id="menu_leadersits_hr_attendance_details" name="الحضور تفصيلي"
               parent="menu_leadersits_hr_attendance" action="action_leadersits_hr_attendance_detail" sequence="10"/>
     <menuitem id="menu_leadersits_hr_attendance_main" name="الحضور والانصراف"
-              parent="menu_leadersits_hr_attendance" action="hr_attendance.hr_attendance_action" sequence="20"/>
+              parent="menu_leadersits_hr_attendance" action="action_leadersits_hr_attendance_its" sequence="20"/>
     <menuitem id="menu_leadersits_hr_attendance_calc" name="إجراء حساب"
               parent="menu_leadersits_hr_attendance"
-              action="action_leadersits_hr_form_test" sequence="30"/>
+              action="action_leadersits_hr_calc_process" sequence="30"/>
     <menuitem id="menu_leadersits_hr_attendance_import" name="سحب بيانات"
               parent="menu_leadersits_hr_attendance" sequence="40"/>
     <menuitem id="menu_leadersits_hr_import_excel" name="اكسيل"
-              parent="menu_leadersits_hr_attendance_import" action="action_leadersits_hr_form_test" sequence="10"/>
+              parent="menu_leadersits_hr_attendance_import" action="action_leadersits_hr_attendance_import" sequence="10"/>
     <menuitem id="menu_leadersits_hr_import_database" name="قواعد بيانات"
               parent="menu_leadersits_hr_attendance_import" action="action_leadersits_hr_form_test" sequence="20"/>
     <menuitem id="menu_leadersits_hr_import_fingerprint" name="ماكينة بصمة"
               parent="menu_leadersits_hr_attendance_import" action="action_leadersits_hr_form_test" sequence="30"/>
     <menuitem id="menu_leadersits_hr_import_mobile" name="تطبيق هاتف"
               parent="menu_leadersits_hr_attendance_import" action="action_leadersits_hr_form_test" sequence="40"/>
+
+    <menuitem id="menu_leadersits_hr_attendance_effects" name="مؤثرات الحضور والانصراف"
+              parent="menu_leadersits_hr_attendance" sequence="50"/>
+    <menuitem id="menu_leadersits_hr_schedule_exceptions" name="استثناءات المواعيد"
+              parent="menu_leadersits_hr_attendance_effects" action="action_leadersits_hr_schedule_exception" sequence="10"/>
+    <menuitem id="menu_leadersits_hr_calc_exceptions" name="استثناءات اجراء الحساب"
+              parent="menu_leadersits_hr_attendance_effects" action="action_leadersits_hr_calc_exception" sequence="20"/>
+    <menuitem id="menu_leadersits_hr_location_exceptions" name="استثناءات مواقع العمل"
+              parent="menu_leadersits_hr_attendance_effects" action="action_leadersits_hr_location_exception" sequence="30"/>
 
     <menuitem id="menu_leadersits_hr_leaves" name="الإجازات"
               parent="menu_leadersits_hr_root" sequence="40"/>
@@ -80,11 +89,14 @@
     <menuitem id="menu_leadersits_hr_time_calculation" name="حساب الوقت"
               parent="menu_leadersits_hr_settings" action="action_leadersits_hr_time_config_open" sequence="20"/>
     <menuitem id="menu_leadersits_hr_settings_import" name="سحب بيانات"
-              parent="menu_leadersits_hr_settings" action="action_leadersits_hr_form_test" sequence="30"/>
+              parent="menu_leadersits_hr_settings" action="action_leadersits_hr_import_config_open" sequence="30"/>
     <menuitem id="menu_leadersits_hr_operation_settings" name="إعدادات التشغيل"
               parent="menu_leadersits_hr_settings" sequence="40"/>
     <menuitem id="menu_leadersits_hr_operation_data" name="بيانات التشغيل"
               parent="menu_leadersits_hr_operation_settings"
               action="action_leadersits_hr_operation_data"
               groups="LeadersITS_HR.group_lits_operation_data" sequence="10"/>
+    <menuitem id="menu_leadersits_hr_operation_general" name="اعدادات عامة"
+              parent="menu_leadersits_hr_operation_settings"
+              action="action_leadersits_hr_general_settings_open" sequence="20"/>
 </odoo>

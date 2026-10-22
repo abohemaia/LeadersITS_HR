@@ -11,8 +11,9 @@ MONTH_SELECTION = [
 
 class LeadersitsHrAttendanceDetail(models.Model):
     _name = 'leadersits.hr.attendance.detail'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = 'الحضور والانصراف تفصيلي'
-    _order = 'calc_date desc, tr_dt desc'
+    _order = 'att_year desc, att_month desc, employee_name asc, calc_date asc, tr_dt asc'
 
     _sql_constraints = [
         ('employee_trdt_unique',
@@ -21,28 +22,41 @@ class LeadersitsHrAttendanceDetail(models.Model):
     ]
 
     employee_id = fields.Many2one(
-        'hr.employee', string="الموظف", required=True, ondelete='cascade')
+        'hr.employee', string="الموظف", required=True, ondelete='cascade',
+        tracking=True)
+    employee_name = fields.Char(
+        related='employee_id.name',
+        string="اسم الموظف", store=True, readonly=True)
     employee_code = fields.Char(
         related='employee_id.lits_employee_code',
         string="كود الموظف", store=True, readonly=True)
-    calc_date = fields.Date(string="تاريخ الحساب", required=True)
-    tr_dt = fields.Datetime(string="وقت الحركة")
+    calc_date = fields.Date(string="تاريخ الحساب", required=True, tracking=True)
+    tr_dt = fields.Datetime(string="وقت الحركة", tracking=True)
     direction = fields.Selection([
         ('--', 'غير محدد'),
         ('in', 'حضور'),
         ('out', 'انصراف'),
-    ], string="الاتجاه", default='--')
-    latitude_in = fields.Float(string="خط عرض الحضور", digits=(10, 7))
-    longitude_in = fields.Float(string="خط طول الحضور", digits=(10, 7))
-    latitude_out = fields.Float(string="خط عرض الانصراف", digits=(10, 7))
-    longitude_out = fields.Float(string="خط طول الانصراف", digits=(10, 7))
+    ], string="الاتجاه", default='--', tracking=True)
+    latitude = fields.Float(string="خط العرض", digits=(10, 7), tracking=True)
+    longitude = fields.Float(string="خط الطول", digits=(10, 7), tracking=True)
     tr_type = fields.Selection([
         ('manual', 'Manual'),
         ('excel', 'Excel'),
         ('tam', 'TAM'),
         ('mapp', 'MApp'),
         ('appdb', 'AppDB'),
-    ], string="نوع الحركة", default='manual')
+        ('system', 'System'),
+    ], string="نوع الحركة", default='manual', tracking=True)
+
+    lits_adjusted = fields.Integer(string="ضبط", default=0)
+
+    def write(self, vals):
+        if 'tr_dt' in vals and 'tr_type' not in vals:
+            vals['tr_type'] = 'manual'
+        reset_fields = {'tr_dt', 'direction', 'calc_date'}
+        if reset_fields & set(vals.keys()) and 'lits_adjusted' not in vals:
+            vals['lits_adjusted'] = 0
+        return super().write(vals)
 
     att_month = fields.Selection(
         MONTH_SELECTION, string="الشهر", store=True, readonly=True,

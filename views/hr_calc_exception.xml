@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_leadersits_hr_calc_exception_form" model="ir.ui.view">
+        <field name="name">leadersits.hr.calc.exception.form</field>
+        <field name="model">leadersits.hr.calc.exception</field>
+        <field name="arch" type="xml">
+            <form string="استثناءات اجراء الحساب">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="target_type" widget="radio"/>
+                            <field name="employee_ids" widget="many2many_tags"
+                                   invisible="target_type != 'employee'"
+                                   required="target_type == 'employee'"/>
+                            <field name="department_ids" widget="many2many_tags"
+                                   invisible="target_type != 'department'"
+                                   required="target_type == 'department'"/>
+                            <field name="job_ids" widget="many2many_tags"
+                                   invisible="target_type != 'job'"
+                                   required="target_type == 'job'"/>
+                        </group>
+                        <group>
+                            <field name="lits_work_system"/>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                            <field name="reason"/>
+                        </group>
+                    </group>
+                    <group string="المؤثرات">
+                        <group>
+                            <field name="eff_late"
+                                   readonly="lits_work_system not in ('work_schedule',)"/>
+                            <field name="eff_leave_during"
+                                   readonly="lits_work_system not in ('work_schedule', 'daily_free')"/>
+                            <field name="eff_early_leave"
+                                   readonly="lits_work_system not in ('work_schedule', 'daily_free')"/>
+                            <field name="eff_morning_ot"
+                                   readonly="lits_work_system not in ('work_schedule',)"/>
+                        </group>
+                        <group>
+                            <field name="eff_evening_ot"
+                                   readonly="lits_work_system not in ('work_days', 'work_schedule', 'daily_free')"/>
+                            <field name="eff_absence"
+                                   readonly="lits_work_system not in ('work_days', 'work_schedule', 'daily_free', 'monthly_free')"/>
+                            <field name="eff_punch_error"
+                                   readonly="lits_work_system == 'consultant'"/>
+                            <field name="eff_location_error"
+                                   readonly="lits_work_system == 'consultant'"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_leadersits_hr_calc_exception_list" model="ir.ui.view">
+        <field name="name">leadersits.hr.calc.exception.list</field>
+        <field name="model">leadersits.hr.calc.exception</field>
+        <field name="arch" type="xml">
+            <list string="استثناءات اجراء الحساب">
+                <field name="target_type"/>
+                <field name="employee_ids" widget="many2many_tags" optional="show"/>
+                <field name="department_ids" widget="many2many_tags" optional="show"/>
+                <field name="job_ids" widget="many2many_tags" optional="show"/>
+                <field name="lits_work_system"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+                <field name="reason"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_leadersits_hr_calc_exception_search" model="ir.ui.view">
+        <field name="name">leadersits.hr.calc.exception.search</field>
+        <field name="model">leadersits.hr.calc.exception</field>
+        <field name="arch" type="xml">
+            <search string="بحث">
+                <field name="employee_ids"/>
+                <field name="department_ids"/>
+                <field name="job_ids"/>
+                <field name="lits_work_system"/>
+                <field name="reason"/>
+                <group expand="0" string="تجميع">
+                    <filter name="group_type" string="الوضع"
+                            context="{'group_by': 'target_type'}"/>
+                    <filter name="group_work_system" string="نظام العمل"
+                            context="{'group_by': 'lits_work_system'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_leadersits_hr_calc_exception" model="ir.actions.act_window">
+        <field name="name">استثناءات اجراء الحساب</field>
+        <field name="res_model">leadersits.hr.calc.exception</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_leadersits_hr_calc_exception_search"/>
+    </record>
+</odoo>

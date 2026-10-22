@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_leadersits_hr_import_config_form" model="ir.ui.view">
+        <field name="name">leadersits.hr.import.config.form</field>
+        <field name="model">leadersits.hr.import.config</field>
+        <field name="arch" type="xml">
+            <form string="إعدادات سحب البيانات" create="0" delete="0">
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group string="مصادر سحب البيانات">
+                            <field name="enable_excel"/>
+                            <field name="enable_database"/>
+                            <field name="enable_fingerprint"/>
+                            <field name="enable_api"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="قواعد بيانات" name="database"
+                              invisible="not enable_database">
+                            <group>
+                                <group>
+                                    <field name="db_server_type"/>
+                                    <field name="db_server_ip"/>
+                                    <field name="db_name"/>
+                                </group>
+                                <group>
+                                    <field name="db_user"/>
+                                    <field name="db_password" password="True"/>
+                                    <field name="db_table"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="ماكينات بصمة" name="fingerprint"
+                              invisible="not enable_fingerprint">
+                            <field name="fingerprint_line_ids">
+                                <list editable="bottom">
+                                    <field name="work_location_id"/>
+                                    <field name="machine_code"/>
+                                    <field name="machine_ip"/>
+                                    <field name="machine_direction"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="ربط API" name="api"
+                              invisible="not enable_api">
+                            <group>
+                                <group>
+                                    <field name="api_url" placeholder="https://..."/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_leadersits_hr_import_config_open" model="ir.actions.server">
+        <field name="name">إعدادات سحب البيانات</field>
+        <field name="model_id" ref="model_leadersits_hr_import_config"/>
+        <field name="state">code</field>
+        <field name="code">action = model.action_open_import_config()</field>
+    </record>
+</odoo>

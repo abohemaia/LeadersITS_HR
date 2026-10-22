@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_leadersits_hr_attendance_its_list" model="ir.ui.view">
+        <field name="name">leadersits.hr.attendance.its.list</field>
+        <field name="model">leadersits.hr.attendance.its</field>
+        <field name="arch" type="xml">
+            <list string="الحضور والانصراف" create="0" edit="0" delete="0"
+                  decoration-info="day_type in ('حضور فقط', 'انصراف فقط')"
+                  decoration-danger="day_type == 'غياب بدون اذن'"
+                  decoration-warning="day_type == 'اجازة اسبوعية'"
+                  decoration-success="day_type not in ('حضور - انصراف', 'حضور فقط', 'انصراف فقط', 'غياب بدون اذن', 'اجازة اسبوعية', False)"
+            >
+                <!-- حقول ظاهرة دائماً -->
+                <field name="employee_id"/>
+                <field name="calc_date"/>
+                <field name="check_in"/>
+                <field name="check_out"/>
+                <field name="day_type"/>
+                <field name="worked_hours" widget="float_time" sum="ساعات العمل"/>
+                <field name="shift" optional="hidden"/>
+                <!-- حقول اختيارية -->
+                <field name="lits_late" optional="hidden" widget="float_time" sum="التأخير"/>
+                <field name="lits_day_out" optional="hidden" widget="float_time" sum="خروج اليوم"/>
+                <field name="lits_early_leave" optional="hidden" widget="float_time" sum="انصراف مبكر"/>
+                <field name="lits_punch_error" optional="hidden" widget="float_time" sum="خطأ بصمه"/>
+                <field name="lits_absence" optional="hidden" widget="float_time" sum="الغياب"/>
+                <field name="lits_location" optional="hidden" widget="float_time" sum="الموقع"/>
+                <field name="lits_ot_morning" optional="hidden" widget="float_time" sum="الاضافي الصباحي"/>
+                <field name="lits_ot_evening" optional="hidden" widget="float_time" sum="الاضافي المسائي"/>
+                <field name="lits_total" optional="hidden" widget="float_time" sum="الاجمالي"/>
+                <field name="lits_ch_late" optional="hidden"/>
+                <field name="lits_ch_day_out" optional="hidden"/>
+                <field name="lits_ch_early_leave" optional="hidden"/>
+                <field name="lits_ch_punch_error" optional="hidden"/>
+                <field name="lits_ch_absence" optional="hidden"/>
+                <field name="lits_ch_location" optional="hidden"/>
+                <field name="lits_ch_ot_morning" optional="hidden"/>
+                <field name="lits_ch_ot_evening" optional="hidden"/>
+                <field name="latitude_in" optional="hidden"/>
+                <field name="longitude_in" optional="hidden"/>
+                <field name="latitude_out" optional="hidden"/>
+                <field name="longitude_out" optional="hidden"/>
+                <field name="att_year" optional="hidden"/>
+                <field name="att_month" optional="hidden"/>
+                <field name="calc" optional="hidden" sum="Calc"/>
+                <field name="payed" optional="hidden"/>
+                <field name="d_id" optional="hidden"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_leadersits_hr_attendance_its_form" model="ir.ui.view">
+        <field name="name">leadersits.hr.attendance.its.form</field>
+        <field name="model">leadersits.hr.attendance.its</field>
+        <field name="arch" type="xml">
+            <form string="الحضور والانصراف" create="0" edit="0" delete="0">
+                <sheet>
+                    <group>
+                        <group string="بيانات الموظف">
+                            <field name="employee_id"/>
+                            <field name="calc_date"/>
+                            <field name="day_type"/>
+                        </group>
+                        <group string="بيانات الحضور">
+                            <field name="check_in"/>
+                            <field name="check_out"/>
+                            <field name="worked_hours" widget="float_time"/>
+                            <field name="shift"/>
+                            <field name="calc"/>
+                            <field name="payed"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="البيانات الإضافية">
+                            <group>
+                                <group string="القيم">
+                                    <field name="lits_late" widget="float_time"/>
+                                    <field name="lits_day_out" widget="float_time"/>
+                                    <field name="lits_early_leave" widget="float_time"/>
+                                    <field name="lits_punch_error" widget="float_time"/>
+                                    <field name="lits_absence" widget="float_time"/>
+                                    <field name="lits_location" widget="float_time"/>
+                                    <field name="lits_ot_morning" widget="float_time"/>
+                                    <field name="lits_ot_evening" widget="float_time"/>
+                                    <field name="lits_total" widget="float_time"/>
+                                </group>
+                                <group string="التحقق">
+                                    <field name="lits_ch_late"/>
+                                    <field name="lits_ch_day_out"/>
+                                    <field name="lits_ch_early_leave"/>
+                                    <field name="lits_ch_punch_error"/>
+                                    <field name="lits_ch_absence"/>
+                                    <field name="lits_ch_location"/>
+                                    <field name="lits_ch_ot_morning"/>
+                                    <field name="lits_ch_ot_evening"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="الإحداثيات">
+                            <group>
+                                <group string="الحضور">
+                                    <field name="latitude_in"/>
+                                    <field name="longitude_in"/>
+                                </group>
+                                <group string="الانصراف">
+                                    <field name="latitude_out"/>
+                                    <field name="longitude_out"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="الربط التفصيلي">
+                            <group>
+                                <field name="lits_detail_checkin_id" readonly="1"/>
+                                <field name="lits_detail_checkout_id" readonly="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_leadersits_hr_attendance_its_search" model="ir.ui.view">
+        <field name="name">leadersits.hr.attendance.its.search</field>
+        <field name="model">leadersits.hr.attendance.its</field>
+        <field name="arch" type="xml">
+            <search string="بحث">
+                <field name="employee_id"/>
+                <field name="calc_date"/>
+                <field name="day_type"/>
+                <field name="att_month"/>
+                <field name="att_year"/>
+                <filter name="filter_today" string="اليوم"
+                        domain="[('calc_date', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                <separator/>
+                <filter name="filter_no_checkout" string="بدون انصراف"
+                        domain="[('check_out', '=', False)]"/>
+                <separator/>
+                <filter name="filter_att_full" string="حضور - انصراف" domain="[('day_type', '=', 'حضور - انصراف')]"/>
+                <filter name="filter_att_in" string="حضور فقط" domain="[('day_type', '=', 'حضور فقط')]"/>
+                <filter name="filter_att_out" string="انصراف فقط" domain="[('day_type', '=', 'انصراف فقط')]"/>
+                <filter name="filter_absent" string="غياب بدون اذن" domain="[('day_type', '=', 'غياب بدون اذن')]"/>
+                <filter name="filter_weekend" string="اجازة اسبوعية" domain="[('day_type', '=', 'اجازة اسبوعية')]"/>
+                <filter name="filter_leave" string="اجازات" domain="[('day_type', 'not in', ['حضور - انصراف', 'حضور فقط', 'انصراف فقط', 'غياب بدون اذن', 'اجازة اسبوعية'])]"/>
+                <separator/>
+                <filter name="filter_jan" string="يناير" domain="[('att_month', '=', '1')]"/>
+                <filter name="filter_feb" string="فبراير" domain="[('att_month', '=', '2')]"/>
+                <filter name="filter_mar" string="مارس" domain="[('att_month', '=', '3')]"/>
+                <filter name="filter_apr" string="أبريل" domain="[('att_month', '=', '4')]"/>
+                <filter name="filter_may" string="مايو" domain="[('att_month', '=', '5')]"/>
+                <filter name="filter_jun" string="يونيو" domain="[('att_month', '=', '6')]"/>
+                <filter name="filter_jul" string="يوليو" domain="[('att_month', '=', '7')]"/>
+                <filter name="filter_aug" string="أغسطس" domain="[('att_month', '=', '8')]"/>
+                <filter name="filter_sep" string="سبتمبر" domain="[('att_month', '=', '9')]"/>
+                <filter name="filter_oct" string="أكتوبر" domain="[('att_month', '=', '10')]"/>
+                <filter name="filter_nov" string="نوفمبر" domain="[('att_month', '=', '11')]"/>
+                <filter name="filter_dec" string="ديسمبر" domain="[('att_month', '=', '12')]"/>
+                <group expand="0" string="تجميع">
+                    <filter name="group_year" string="السنة" context="{'group_by': 'att_year'}"/>
+                    <filter name="group_month" string="الشهر" context="{'group_by': 'att_month'}"/>
+                    <filter name="group_employee" string="الموظف" context="{'group_by': 'employee_id'}"/>
+                    <filter name="group_day" string="تاريخ اليوم" context="{'group_by': 'calc_date:day'}"/>
+                    <filter name="group_day_type" string="نوع البيان" context="{'group_by': 'day_type'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_leadersits_hr_attendance_its" model="ir.actions.act_window">
+        <field name="name">الحضور والانصراف</field>
+        <field name="res_model">leadersits.hr.attendance.its</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_leadersits_hr_attendance_its_search"/>
+        <field name="context">{'search_default_group_year': 1, 'search_default_group_month': 2, 'search_default_group_employee': 3, 'search_default_group_day': 4}</field>
+    </record>
+</odoo>

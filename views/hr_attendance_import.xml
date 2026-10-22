@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="seq_leadersits_hr_attendance_import" model="ir.sequence">
+            <field name="name">سحب بيانات الحضور</field>
+            <field name="code">leadersits.hr.attendance.import</field>
+            <field name="prefix">ATT-IMP/</field>
+            <field name="padding">4</field>
+        </record>
+    </data>
+
+    <record id="view_leadersits_hr_attendance_import_form" model="ir.ui.view">
+        <field name="name">leadersits.hr.attendance.import.form</field>
+        <field name="model">leadersits.hr.attendance.import</field>
+        <field name="arch" type="xml">
+            <form string="سحب بيانات الحضور من اكسيل">
+                <header>
+                    <button name="action_test" string="اختبار" type="object"
+                            class="btn-primary"
+                            invisible="state not in ('draft', 'error')"/>
+                    <button name="action_send" string="إرسال إلى الحضور والانصراف"
+                            type="object" class="btn-success"
+                            invisible="state != 'tested'"
+                            confirm="هل أنت متأكد من إرسال البيانات إلى الحضور والانصراف تفصيلي؟"/>
+                    <button name="action_reset" string="إعادة" type="object"
+                            invisible="state == 'draft'"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,tested,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="excel_file" filename="file_name"
+                                   readonly="state not in ('draft', 'error')"/>
+                            <field name="file_name" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="expected_month"
+                                   readonly="state not in ('draft', 'error')"/>
+                        </group>
+                    </group>
+                    <group invisible="state == 'draft'">
+                        <group>
+                            <field name="total_rows"/>
+                            <field name="valid_rows"/>
+                            <field name="error_rows"/>
+                        </group>
+                        <group>
+                            <field name="sent_count"
+                                   invisible="state != 'done'"/>
+                            <field name="duplicate_count"
+                                   invisible="state != 'done'"/>
+                        </group>
+                    </group>
+                    <notebook invisible="state == 'draft'">
+                        <page string="السجل">
+                            <field name="log"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_leadersits_hr_attendance_import_list" model="ir.ui.view">
+        <field name="name">leadersits.hr.attendance.import.list</field>
+        <field name="model">leadersits.hr.attendance.import</field>
+        <field name="arch" type="xml">
+            <list string="سحب بيانات الحضور">
+                <field name="name"/>
+                <field name="file_name"/>
+                <field name="expected_month"/>
+                <field name="state"/>
+                <field name="total_rows"/>
+                <field name="valid_rows"/>
+                <field name="sent_count"/>
+                <field name="create_date"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_leadersits_hr_attendance_import" model="ir.actions.act_window">
+        <field name="name">سحب بيانات الحضور من اكسيل</field>
+        <field name="res_model">leadersits.hr.attendance.import</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

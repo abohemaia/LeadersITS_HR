@@ -28,6 +28,19 @@ class LeadersitsHrTimeConfig(models.Model):
     month_start_day = fields.Integer(string="يوم بداية الشهر")
     month_end_day = fields.Integer(string="يوم نهاية الشهر")
 
+    location_error_penalty = fields.Selection([
+        ('minutes', 'دقائق'),
+        ('quarter_day', 'ربع يوم'),
+        ('half_day', 'نصف يوم'),
+        ('full_day', 'يوم'),
+    ], string="جزاء خطأ الموقع", default='minutes', required=True)
+    location_penalty_minutes = fields.Integer(string="عدد دقائق خطأ الموقع")
+
+    calc_method = fields.Selection([
+        ('daily', 'يومي'),
+        ('monthly', 'شهري'),
+    ], string="اجراء الحساب", default='daily', required=True)
+
     missing_punch = fields.Selection([
         ('from_shift', 'من الشيفت'),
         ('leave_empty', 'يترك فارغ'),

@@ -24,6 +24,10 @@
                                    readonly="lits_work_system not in ('work_days', 'work_schedule', 'daily_free')"/>
                             <field name="eff_absence"
                                    readonly="lits_work_system not in ('work_days', 'work_schedule', 'daily_free', 'monthly_free')"/>
+                            <field name="eff_punch_error"
+                                   readonly="lits_work_system == 'consultant'"/>
+                            <field name="eff_location_error"
+                                   readonly="lits_work_system == 'consultant'"/>
                         </group>
                     </group>
                 </page>

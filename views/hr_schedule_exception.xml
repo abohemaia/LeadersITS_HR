@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_leadersits_hr_schedule_exception_form" model="ir.ui.view">
+        <field name="name">leadersits.hr.schedule.exception.form</field>
+        <field name="model">leadersits.hr.schedule.exception</field>
+        <field name="arch" type="xml">
+            <form string="استثناءات المواعيد">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="target_type" widget="radio"/>
+                            <field name="employee_ids" widget="many2many_tags"
+                                   invisible="target_type != 'employee'"
+                                   required="target_type == 'employee'"/>
+                            <field name="department_ids" widget="many2many_tags"
+                                   invisible="target_type != 'department'"
+                                   required="target_type == 'department'"/>
+                            <field name="job_ids" widget="many2many_tags"
+                                   invisible="target_type != 'job'"
+                                   required="target_type == 'job'"/>
+                        </group>
+                        <group>
+                            <field name="resource_calendar_id"/>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                            <field name="reason"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_leadersits_hr_schedule_exception_list" model="ir.ui.view">
+        <field name="name">leadersits.hr.schedule.exception.list</field>
+        <field name="model">leadersits.hr.schedule.exception</field>
+        <field name="arch" type="xml">
+            <list string="استثناءات المواعيد">
+                <field name="target_type"/>
+                <field name="employee_ids" widget="many2many_tags"
+                       optional="show"/>
+                <field name="department_ids" widget="many2many_tags"
+                       optional="show"/>
+                <field name="job_ids" widget="many2many_tags"
+                       optional="show"/>
+                <field name="resource_calendar_id"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+                <field name="reason"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_leadersits_hr_schedule_exception_search" model="ir.ui.view">
+        <field name="name">leadersits.hr.schedule.exception.search</field>
+        <field name="model">leadersits.hr.schedule.exception</field>
+        <field name="arch" type="xml">
+            <search string="بحث">
+                <field name="employee_ids"/>
+                <field name="department_ids"/>
+                <field name="job_ids"/>
+                <field name="resource_calendar_id"/>
+                <field name="reason"/>
+                <group expand="0" string="تجميع">
+                    <filter name="group_type" string="الوضع"
+                            context="{'group_by': 'target_type'}"/>
+                    <filter name="group_calendar" string="مواعيد العمل"
+                            context="{'group_by': 'resource_calendar_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_leadersits_hr_schedule_exception" model="ir.actions.act_window">
+        <field name="name">استثناءات المواعيد</field>
+        <field name="res_model">leadersits.hr.schedule.exception</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_leadersits_hr_schedule_exception_search"/>
+    </record>
+</odoo>

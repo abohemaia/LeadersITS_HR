@@ -21,15 +21,29 @@
                                 <field name="month_end_day" class="oe_inline o_hr_narrow_field"
                                        readonly="1"/>
                             </div>
+                            <label for="location_error_penalty" string="جزاء خطأ الموقع"/>
+                            <div class="o_row">
+                                <field name="location_error_penalty" class="oe_inline"/>
+                                <field name="location_penalty_minutes" class="oe_inline o_hr_narrow_field"
+                                       readonly="location_error_penalty != 'minutes'"
+                                       required="location_error_penalty == 'minutes'"
+                                       placeholder="عدد الدقائق"/>
+                            </div>
                         </group>
                         <group string="البصمة">
-                            <field name="missing_punch"/>
+                            <field name="calc_method"/>
+                            <label for="missing_punch" string="بصمة ناقصة"/>
+                            <div class="o_row">
+                                <field name="missing_punch" class="oe_inline"
+                                       readonly="calc_method == 'monthly'"/>
+                            </div>
                             <label for="empty_punch_penalty"/>
                             <div class="o_row">
-                                <field name="empty_punch_penalty" class="oe_inline"/>
+                                <field name="empty_punch_penalty" class="oe_inline"
+                                       readonly="calc_method == 'monthly' or missing_punch == 'from_shift'"/>
                                 <field name="penalty_minutes" class="oe_inline o_hr_narrow_field"
-                                       readonly="empty_punch_penalty != 'minutes'"
-                                       required="empty_punch_penalty == 'minutes'"
+                                       readonly="calc_method == 'monthly' or missing_punch == 'from_shift' or empty_punch_penalty != 'minutes'"
+                                       required="calc_method == 'daily' and missing_punch == 'leave_empty' and empty_punch_penalty == 'minutes'"
                                        placeholder="عدد الدقائق"/>
                             </div>
                             <label for="half_day_exit"/>

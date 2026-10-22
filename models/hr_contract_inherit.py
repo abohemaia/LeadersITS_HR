@@ -1,17 +1,18 @@
 from odoo import api, fields, models
 
 WORK_SYSTEM_EFFECTS = {
-    'work_days':     {'eff_late': False, 'eff_leave_during': False, 'eff_early_leave': False, 'eff_morning_ot': False, 'eff_evening_ot': True,  'eff_absence': True},
-    'work_schedule': {'eff_late': True,  'eff_leave_during': True,  'eff_early_leave': True,  'eff_morning_ot': True,  'eff_evening_ot': True,  'eff_absence': True},
-    'daily_free':    {'eff_late': False, 'eff_leave_during': True,  'eff_early_leave': True,  'eff_morning_ot': False, 'eff_evening_ot': True,  'eff_absence': True},
-    'monthly_free':  {'eff_late': False, 'eff_leave_during': False, 'eff_early_leave': False, 'eff_morning_ot': False, 'eff_evening_ot': False, 'eff_absence': True},
-    'free_hours':    {'eff_late': False, 'eff_leave_during': False, 'eff_early_leave': False, 'eff_morning_ot': False, 'eff_evening_ot': False, 'eff_absence': False},
-    'consultant':    {'eff_late': False, 'eff_leave_during': False, 'eff_early_leave': False, 'eff_morning_ot': False, 'eff_evening_ot': False, 'eff_absence': False},
+    'work_days':     {'eff_late': False, 'eff_leave_during': False, 'eff_early_leave': False, 'eff_morning_ot': False, 'eff_evening_ot': True,  'eff_absence': True,  'eff_punch_error': True,  'eff_location_error': True},
+    'work_schedule': {'eff_late': True,  'eff_leave_during': True,  'eff_early_leave': True,  'eff_morning_ot': True,  'eff_evening_ot': True,  'eff_absence': True,  'eff_punch_error': True,  'eff_location_error': True},
+    'daily_free':    {'eff_late': False, 'eff_leave_during': True,  'eff_early_leave': True,  'eff_morning_ot': False, 'eff_evening_ot': True,  'eff_absence': True,  'eff_punch_error': True,  'eff_location_error': True},
+    'monthly_free':  {'eff_late': False, 'eff_leave_during': False, 'eff_early_leave': False, 'eff_morning_ot': False, 'eff_evening_ot': False, 'eff_absence': True,  'eff_punch_error': True,  'eff_location_error': True},
+    'free_hours':    {'eff_late': False, 'eff_leave_during': False, 'eff_early_leave': False, 'eff_morning_ot': False, 'eff_evening_ot': False, 'eff_absence': False, 'eff_punch_error': True,  'eff_location_error': True},
+    'consultant':    {'eff_late': False, 'eff_leave_during': False, 'eff_early_leave': False, 'eff_morning_ot': False, 'eff_evening_ot': False, 'eff_absence': False, 'eff_punch_error': False, 'eff_location_error': False},
 }
 
 EFFECT_FIELDS = [
     'eff_late', 'eff_leave_during', 'eff_early_leave',
     'eff_morning_ot', 'eff_evening_ot', 'eff_absence',
+    'eff_punch_error', 'eff_location_error',
 ]
 
 
@@ -33,6 +34,8 @@ class HrContractLits(models.Model):
     eff_morning_ot = fields.Boolean(string="إضافي صباحي")
     eff_evening_ot = fields.Boolean(string="إضافي مسائي")
     eff_absence = fields.Boolean(string="غياب")
+    eff_punch_error = fields.Boolean(string="خطأ بصمة")
+    eff_location_error = fields.Boolean(string="خطأ الموقع")
 
     @api.onchange('lits_work_system')
     def _onchange_lits_work_system(self):

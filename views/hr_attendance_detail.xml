@@ -4,8 +4,9 @@
         <field name="name">leadersits.hr.attendance.detail.list</field>
         <field name="model">leadersits.hr.attendance.detail</field>
         <field name="arch" type="xml">
-            <list string="الحضور والانصراف تفصيلي" editable="bottom">
-                <field name="employee_id"/>
+            <list string="الحضور والانصراف تفصيلي" editable="bottom"
+                  decoration-danger="lits_adjusted == 0">
+                <field name="employee_id" readonly="id"/>
                 <field name="employee_code"/>
                 <field name="calc_date"/>
                 <field name="tr_dt"/>
@@ -13,10 +14,9 @@
                 <field name="tr_type" readonly="1"/>
                 <field name="att_month" optional="hide"/>
                 <field name="att_year" optional="hide"/>
-                <field name="latitude_in" optional="hide"/>
-                <field name="longitude_in" optional="hide"/>
-                <field name="latitude_out" optional="hide"/>
-                <field name="longitude_out" optional="hide"/>
+                <field name="latitude" optional="hide" readonly="1"/>
+                <field name="longitude" optional="hide" readonly="1"/>
+                <field name="lits_adjusted" column_invisible="1"/>
             </list>
         </field>
     </record>
@@ -29,7 +29,7 @@
                 <sheet>
                     <group>
                         <group string="بيانات الموظف">
-                            <field name="employee_id"/>
+                            <field name="employee_id" readonly="id"/>
                             <field name="employee_code"/>
                         </group>
                         <group string="بيانات الحركة">
@@ -42,16 +42,13 @@
                         </group>
                     </group>
                     <group>
-                        <group string="إحداثيات الحضور">
-                            <field name="latitude_in"/>
-                            <field name="longitude_in"/>
-                        </group>
-                        <group string="إحداثيات الانصراف">
-                            <field name="latitude_out"/>
-                            <field name="longitude_out"/>
+                        <group string="الإحداثيات">
+                            <field name="latitude" readonly="1"/>
+                            <field name="longitude" readonly="1"/>
                         </group>
                     </group>
                 </sheet>
+                <chatter/>
             </form>
         </field>
     </record>
@@ -103,5 +100,6 @@
         <field name="res_model">leadersits.hr.attendance.detail</field>
         <field name="view_mode">list,form</field>
         <field name="search_view_id" ref="view_leadersits_hr_attendance_detail_search"/>
+        <field name="context">{'search_default_group_year': 1, 'search_default_group_month': 2, 'search_default_group_employee': 3}</field>
     </record>
 </odoo>

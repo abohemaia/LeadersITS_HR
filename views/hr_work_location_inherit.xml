@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_hr_work_location_form_inherit_lits" model="ir.ui.view">
+        <field name="name">hr.work.location.form.inherit.lits</field>
+        <field name="model">hr.work.location</field>
+        <field name="inherit_id" ref="hr.hr_work_location_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[2]" position="inside">
+                <field name="lits_latitude"/>
+                <field name="lits_longitude"/>
+                <field name="lits_enabled"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_hr_work_location_list_inherit_lits" model="ir.ui.view">
+        <field name="name">hr.work.location.list.inherit.lits</field>
+        <field name="model">hr.work.location</field>
+        <field name="inherit_id" ref="hr.hr_work_location_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="lits_enabled"/>
+                <field name="lits_latitude" optional="hide"/>
+                <field name="lits_longitude" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
